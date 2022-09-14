@@ -1,0 +1,1 @@
+app.UseCors(); in Startup.cs
