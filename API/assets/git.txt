@@ -1,1 +1,3 @@
-angLab-2>git init
+angLab-2>git init 
+
+check publish
