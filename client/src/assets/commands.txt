@@ -1,0 +1,1 @@
+angLab-2>ng new client --strict false
