@@ -88,3 +88,6 @@ To run migrations you need Microsoft.EntityFrameworkCore.Design (nuget gallery)
 
 dotnet ef migrations add InitialCreate -o Data/Migrations
 dotnet ef database update
+
+dotnet ef migrations add UserPasswordAdded
+dotnet ef database update
