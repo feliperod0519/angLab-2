@@ -38,7 +38,7 @@ public class UsersController : BaseApiController
     [AllowAnonymous]
     [HttpPost("RegisterNew")]
     public async Task<ActionResult<TokenJWTDto>> RegisterNew(RegisterDto registration){
-        if (CheckIfUserExists(registration.email))
+        if ((await CheckIfUserExistsAsync(registration.email)))
             return BadRequest("User Name already exists!");
         using var hmac = new HMACSHA512();
         var user = new AppUser{
@@ -58,13 +58,13 @@ public class UsersController : BaseApiController
                                  });
     }
 
-    private bool CheckIfUserExists(string email){
-        return (_context.Users.SingleOrDefault<AppUser>(u=>u.EMail==email)!=null)?true:false;
+    private async Task<bool> CheckIfUserExistsAsync(string email){
+        return (await _context.Users.SingleOrDefaultAsync<AppUser>(u=>u.EMail==email)!=null)?true:false;
     }
 
     [HttpPost("login")]
     public async Task<ActionResult<TokenJWTDto>> Login(LoginDto login){
-        if (!CheckIfUserExists(login.email))
+        if (!(await CheckIfUserExistsAsync(login.email)))
             return BadRequest(string.Format("{0} is not registered!",login.email));
         
         var user = await _context.Users

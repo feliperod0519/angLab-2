@@ -1,1 +1,84 @@
 angLab-2>ng new client --strict false
+https://valor-software.com/ngx-bootstrap/#/
+client>npm install ngx-bootstrap --save
+Check package.json
+npm install bootstrap@5.2.0 --save
+Check package.json
+  "dependencies": {
+    "@angular/animations": "^14.2.0",
+    "@angular/common": "^14.2.0",
+    "@angular/compiler": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "@angular/forms": "^14.2.0",
+    "@angular/platform-browser": "^14.2.0",
+    "@angular/platform-browser-dynamic": "^14.2.0",
+    "@angular/router": "^14.2.0",
+    "bootstrap": "^5.2.0",
+    "ngx-bootstrap": "^9.0.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.11.4"
+  
+check angular.json
+"styles": [
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ]
+
+client>npm install font-awesome
+
+For ssl:
+
+En angular.json
+
+"serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+              "sslKey": "./ssl/server.key",
+              "sslCert": "./ssl/server.crt",
+              "ssl":true
+          },
+
+Install toastr
+
+npm install ngx-toastr –save
+
+In angular.json
+
+"styles": [
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/styles.css"
+            ],
+"scripts": [ "./node_modules/bootstrap/dist/js/bootstrap.min.js" ]
+
+Install angular-jwt
+npm install @auth0/angular-jwt -save
+
+https://www.npmjs.com/package/@auth0/angular-jwt
+
+EXAMPLE
+import { JwtModule } from "@auth0/angular-jwt";
+import { HttpClientModule } from "@angular/common/http";
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
+
+@NgModule({
+  bootstrap: [AppComponent],
+  imports: [
+    // ...
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["example.com"],
+        disallowedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
+  ],
+})
+export class AppModule {}
