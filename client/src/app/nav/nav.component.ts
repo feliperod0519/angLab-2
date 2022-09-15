@@ -6,6 +6,7 @@ import { ReplaySubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
+import { Output, EventEmitter } from '@angular/core';
 
 import { IUser } from '../_models/IUser';
 
@@ -21,6 +22,7 @@ export class NavComponent implements OnInit {
   currentUser = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUser.asObservable();
   loggedIn = false;
+  @Output() newAuthenticatedUser = new EventEmitter<string>();
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -42,6 +44,7 @@ export class NavComponent implements OnInit {
                                   {
                                     this.setCurrentUser(r);
                                     this.loggedIn =true;
+                                    this.newAuthenticatedUser.emit(r.email);
                                     //this.toastr.success("Welcome " + r.email);
                                   }
                                 },

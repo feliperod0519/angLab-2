@@ -14,11 +14,6 @@
           <li class="nav-item" *ngIf="loggedIn">
             <a class="nav-link" (click)="logout()">Logout</a>
           </li>
-          <li class="nav-item" *ngIf="loggedIn">
-            <ng-container *ngIf="(currentUser$ |async) as user">
-              <span class="badge">Hello {{user.email}}</span>
-            </ng-container>
-          </li>
         </ul>
         <ng-container *ngIf="!loggedIn" >
           <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
@@ -26,6 +21,9 @@
             <input id="password" name="password" ngModel class="form-control me-2" type="password" placeholder="password" required >
             <button class="btn btn-outline-success" type="submit">Login</button>
           </form>
+        </ng-container>
+        <ng-container *ngIf="(currentUser$ |async) as user">
+          <span class="badge">¯\_(ツ)_/¯ {{user.email}}</span>
         </ng-container>
     </div>
   </nav>

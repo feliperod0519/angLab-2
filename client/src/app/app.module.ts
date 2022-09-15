@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
+import { HomeComponent } from './home/home.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwtUser");
@@ -17,7 +18,8 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
