@@ -10,6 +10,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
+import { MyInfoComponent } from './my-info/my-info.component';
+import { RegisterComponent } from './register/register.component';
+import { MessagesComponent } from './messages/messages.component';
+import { UpdateComponent } from './update/update.component';
+
+import { AuthGuardService } from '../app/_guards/auth-guard.service'
 
 export function tokenGetter() {
   return localStorage.getItem("jwtUser");
@@ -19,7 +25,11 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    MyInfoComponent,
+    RegisterComponent,
+    MessagesComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +46,7 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

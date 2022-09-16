@@ -7,8 +7,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  @Input() currentUserEmail='dummy@gmail.com';
+  //@Input() currentUserEmail='dummy@gmail.com';
+  currentUserEmail:string;
+  currentUserEmailToChild:string;
 
+  /*
+  login(loginUserEmail:string){
+    this.currentUserEmail=loginUserEmail;
+    this.currentUserEmailToChild=loginUserEmail;
+  }
+  */
+ 
   constructor() { }
 
   ngOnInit(): void {

@@ -1,15 +1,22 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">Felipe training ground</a>
+      <a class="navbar-brand" href="/" routerLinkActive="active">Felipe training ground</a>
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Info</a>
+            <a class="nav-link" routerLinkActive="active" [hidden]="loggedIn" 
+               aria-current="page" routerLink="/register">New User?</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">List</a>
+            <a class="nav-link"  aria-current="page" 
+               routerLink="/myInfo" [hidden]="!loggedIn">My Info</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Messages</a>
+            <a class="nav-link" routerLinkActive="active" aria-current="page" 
+               routerLink="/messages" [hidden]="!loggedIn">Messages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" aria-current="page" 
+               routerLink="/update" [hidden]="!loggedIn">Update</a>
           </li>
           <li class="nav-item" *ngIf="loggedIn">
             <a class="nav-link" (click)="logout()">Logout</a>

@@ -10,7 +10,6 @@ import { Output, EventEmitter } from '@angular/core';
 
 import { IUser } from '../_models/IUser';
 
-
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -57,7 +56,7 @@ export class NavComponent implements OnInit {
   }
 
   setCurrentUser(jwtUser:IUser){
-    localStorage.setItem('jwtUser',JSON.stringify(jwtUser));
+    localStorage.setItem('jwtUser',JSON.stringify(jwtUser.jwtToken));
     console.log("setCurrentUser->" + jwtUser.email);
     this.currentUser.next(jwtUser);
   }

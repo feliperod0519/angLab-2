@@ -3,3 +3,4 @@ export interface IUser{
     jwtToken: string;
     serverTime: string;
 }
+
