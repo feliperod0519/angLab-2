@@ -1,0 +1,23 @@
+client>npm install ngx-toastr
+add some styles to angular.json
+"styles": [
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/styles.css"
+            ],
+
+In app.module.ts
+
+import { ToastrModule } from 'ngx-toastr';
+...
+imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({positionClass:'toast-bottom-right'}),
+
+    

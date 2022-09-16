@@ -21,7 +21,8 @@ const routes: Routes = [
       {path:'update',component:UpdateComponent}
     ]
   },
-  {path:'register',component:RegisterComponent}
+  {path:'register',component:RegisterComponent},
+  {path:'**',component:HomeComponent,pathMatch:'full'}
 ];
 
 @NgModule({

@@ -33,24 +33,27 @@ export class NavComponent implements OnInit {
 
   public login = (form:NgForm)=>{
     const credentials = JSON.stringify(form.value);
-    console.log("login1->" + credentials);
     const httpHeaders = new HttpHeaders({"Content-Type":"application/json"});
     this.http.post(this.baseUrl + "/users/login",credentials,{"headers":httpHeaders})
     .subscribe({
                 next:(r:IUser)=>{
-                                  console.log("login2->",r.email);
                                   if (r)
                                   {
                                     this.setCurrentUser(r);
                                     this.loggedIn =true;
                                     this.newAuthenticatedUser.emit(r.email);
-                                    //this.toastr.success("Welcome " + r.email);
+                                    this.toastr.success("Welcome " + r.email);
+                                  }
+                                  else{
+                                    this.toastr.error("Incorrect credentials!");
+                                    this.loggedIn =false;
                                   }
                                 },
                 error:(e)=>
                 { 
                     console.log(e);
                     this.loggedIn = false;
+                    //this.toastr.error("Incorrect credentials!");
                 }        
               })
   }

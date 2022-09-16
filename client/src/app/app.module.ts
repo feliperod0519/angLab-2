@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
@@ -16,6 +16,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { UpdateComponent } from './update/update.component';
 
 import { AuthGuardService } from '../app/_guards/auth-guard.service'
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem("jwtUser");
@@ -33,10 +34,11 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({positionClass:'toast-bottom-right'}),
     HttpClientModule,
     JwtModule.forRoot({
       config: {
@@ -46,7 +48,10 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [AuthGuardService],
+  providers: [
+    AuthGuardService,
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
