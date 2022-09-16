@@ -14,6 +14,8 @@ namespace API.Entities
 
         public string LastName { get; set; }
 
+        public string ProfilePhoto { get; set; }
+
         public DateTime CreationDateTime { get; set; }
 
     }

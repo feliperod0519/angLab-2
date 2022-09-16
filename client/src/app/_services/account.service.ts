@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Log } from '../_models/Log';
+
+import { AppUser } from '../_models/AppUser';
 import { environment } from 'src/environments/environment';
+import { IUser } from '../_models/IUser';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoggingService {
+export class AccountService {
 
   baseUrl = environment.apiUrl;
 
   constructor(private http:HttpClient) { }
 
-  logSuccess(entry:Log):Observable<any>{
+  register(model:AppUser):Observable<IUser>{
     const httpHeaders = { headers:new HttpHeaders({'Content-Type': 'application/json'}) };
-    return this.http.post(this.baseUrl + "/log/logentry",entry,httpHeaders);
+    return this.http.post<IUser>(this.baseUrl + "/users/registernew",model,httpHeaders);
   }
 }

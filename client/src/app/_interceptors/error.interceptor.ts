@@ -24,7 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.toastr.error("VALIDATION ERROR " + e.statusText,e.status);
               break;
             case 401:
-              this.toastr.error(e.statusText,e.status);
+              this.toastr.error("Invalid credentials");//(e.statusText,e.status);
               break;
             case 404:
               this.router.navigateByUrl('/.not-found');

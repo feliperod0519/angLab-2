@@ -13,6 +13,7 @@ namespace API.Controllers;
 
 public class UsersController : BaseApiController
 {
+
     private readonly APIDataContext _context;
     private readonly ITokenService _tokenService;
 
@@ -47,6 +48,7 @@ public class UsersController : BaseApiController
             PasswordSalt = hmac.Key,
             LastName = registration.lastName.ToUpper(),
             FirstName = registration.firstName.ToUpper(),
+            ProfilePhoto = string.IsNullOrEmpty(registration.profilePhoto)?"./asset/default.jpg":registration.profilePhoto,
             CreationDateTime = DateTime.Now
         };
         _context.Users.Add(user);

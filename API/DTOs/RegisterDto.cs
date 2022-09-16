@@ -16,5 +16,7 @@ namespace API.DTOs
 
         public string lastName { get; set; }
 
+        public string profilePhoto { get; set; }
+
     }
 }

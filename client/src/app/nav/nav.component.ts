@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Output, EventEmitter } from '@angular/core';
 
 import { IUser } from '../_models/IUser';
+import { LoggingService } from '../_services/logging.service';
+import { Log } from '../_models/Log';
 
 @Component({
   selector: 'app-nav',
@@ -18,6 +20,7 @@ import { IUser } from '../_models/IUser';
 export class NavComponent implements OnInit {
 
   baseUrl = environment.apiUrl;
+  logEvents = environment.logOn;
   currentUser = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUser.asObservable();
   loggedIn = false;
@@ -26,7 +29,8 @@ export class NavComponent implements OnInit {
   constructor(private http: HttpClient,
               private router: Router,
               private jwtHelper: JwtHelperService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private logService: LoggingService) { }
 
   ngOnInit(): void {
   }
@@ -37,12 +41,14 @@ export class NavComponent implements OnInit {
     this.http.post(this.baseUrl + "/users/login",credentials,{"headers":httpHeaders})
     .subscribe({
                 next:(r:IUser)=>{
-                                  if (r)
-                                  {
+                                  if (r){
                                     this.setCurrentUser(r);
                                     this.loggedIn =true;
                                     this.newAuthenticatedUser.emit(r.email);
                                     this.toastr.success("Welcome " + r.email);
+                                    if (this.logEvents)
+                                      this.logService.logSuccess({ email: r.email, type: 1, message: "Successful login"})
+                                        .subscribe({next:(r)=>{console.log(r)}});
                                   }
                                   else{
                                     this.toastr.error("Incorrect credentials!");
@@ -53,14 +59,12 @@ export class NavComponent implements OnInit {
                 { 
                     console.log(e);
                     this.loggedIn = false;
-                    //this.toastr.error("Incorrect credentials!");
                 }        
               })
   }
 
   setCurrentUser(jwtUser:IUser){
     localStorage.setItem('jwtUser',JSON.stringify(jwtUser.jwtToken));
-    console.log("setCurrentUser->" + jwtUser.email);
     this.currentUser.next(jwtUser);
   }
 

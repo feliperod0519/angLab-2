@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,35 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(APIDataContext))]
-    partial class APIDataContextModelSnapshot : ModelSnapshot
+    [Migration("20220916014407_AddLogs")]
+    partial class AddLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.9");
-
-            modelBuilder.Entity("API.Entities.AppLog", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("EMail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("EventTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Logs");
-                });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
@@ -63,9 +42,6 @@ namespace API.Data.Migrations
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
-
-                    b.Property<string>("ProfilePhoto")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

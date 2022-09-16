@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(APIDataContext))]
-    partial class APIDataContextModelSnapshot : ModelSnapshot
+    [Migration("20220916014800_AddLogs-2")]
+    partial class AddLogs2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.9");
@@ -24,9 +26,6 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("EMail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("EventTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Message")
@@ -63,9 +62,6 @@ namespace API.Data.Migrations
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
-
-                    b.Property<string>("ProfilePhoto")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
